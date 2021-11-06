@@ -10,6 +10,7 @@ import 'package:clase_3/src/pages/slider_page.dart';
 import 'package:clase_3/src/pages/listview_page.dart';
 import 'package:clase_3/src/pages/opacity_page.dart';
 import 'package:clase_3/src/pages/table_page.dart';
+import 'package:clase_3/src/pages/Form_mascotas.dart';
 
 
 Map<String, WidgetBuilder> getApplicationRoutes() {
@@ -21,6 +22,7 @@ Map<String, WidgetBuilder> getApplicationRoutes() {
       'card'   : ( BuildContext context ) => CardPage(),
       'animatedContainer'   : ( BuildContext context ) => AnimatedContainerPage(),
       'inputs' : ( BuildContext context ) => InputPage(),
+      'Form'   : (BuildContext context ) => FormMascotas(),
       'slider' : ( BuildContext context ) => SliderPage(),
       'list'   : ( BuildContext context ) => ListaPage(),
       'opacity': ( BuildContext context ) => OpacityPage(),

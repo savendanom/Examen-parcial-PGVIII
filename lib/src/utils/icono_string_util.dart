@@ -11,6 +11,7 @@ final _icons = <String, IconData>{
   'tune'          : Icons.tune,
   'aod_outlined'  : Icons.ad_units_outlined,
   'table'         : Icons.table_chart_outlined,
+  'Form'          : Icons.list_sharp
 };
 
 
@@ -19,5 +20,5 @@ final _icons = <String, IconData>{
 Icon getIcon( String nombreIcono ) {
 
   return Icon( _icons[nombreIcono], color: Colors.blue );
-  
+
 }

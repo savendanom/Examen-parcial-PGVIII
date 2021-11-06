@@ -6,7 +6,6 @@ class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
-
 class _InputPageState extends State<InputPage> {
 
   String _nombre = '';
@@ -54,7 +53,7 @@ class _InputPageState extends State<InputPage> {
           borderRadius: BorderRadius.circular(20.0)
         ),
         counter: Text('Letras ${ _nombre.length }'),
-        hintText: 'Nombre de la persona',
+        hintText: 'Nombre',
         labelText: 'Nombre',
         helperText: 'Sólo es el nombre',
         suffixIcon: Icon( Icons.accessibility ),
@@ -124,7 +123,7 @@ class _InputPageState extends State<InputPage> {
         suffixIcon: Icon( Icons.perm_contact_calendar ),
         icon: Icon( Icons.calendar_today )
       ),
-      onTap: (){ 
+      onTap: (){
 
         FocusScope.of(context).requestFocus(new FocusNode());
         _selectDate( context );
@@ -148,7 +147,7 @@ class _InputPageState extends State<InputPage> {
       setState(() {
           _fecha = picked.toString();
           _inputFieldDateController.text = _fecha;
-      }); 
+      });
     }
 
   }
@@ -175,7 +174,7 @@ class _InputPageState extends State<InputPage> {
     return Row(
       children: <Widget>[
         Icon(Icons.select_all),
-        SizedBox(width: 30.0),   
+        SizedBox(width: 30.0),
         Expanded(
           child: DropdownButton(
             value: _opcionSeleccionada,
@@ -190,10 +189,10 @@ class _InputPageState extends State<InputPage> {
 
       ],
     );
-    
-    
-    
-    
+
+
+
+
 
   }
 

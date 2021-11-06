@@ -45,6 +45,11 @@
             "ruta" : "table",
             "icon" : "table",
             "texto": "Table - Widget"
+        },
+        {
+            "ruta" : "Form",
+            "icon" : "input",
+            "texto": "Mascotas - Widget"
         }
     ]
 }
