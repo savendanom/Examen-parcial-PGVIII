@@ -11,16 +11,15 @@ class _InputPageMascotas extends State<FormMascotas> {
 String _nombre = '';
 String _nombrepropietario  = '';
 String _telefonod  = '';
-String _raza = '';
-String _sexo = '';
 String _edad = '';
-String _tipom = '';
 String _fecha = '';
 
-
-String _opcionSeleccionada = 'Macho';
-
+String _opcionraza = 'Labrador';
+String _opcionsexo = 'Macho';
+String _opciontipo = 'Perro';
 List<String> _sexos = ['Macho', 'Hembra'];
+List<String> _razas = ['Labrador', 'Husky', 'Golden', 'Angora', 'Pantera', ];
+List<String> _tipos = ['Ave', 'Perro', 'Gato', 'Mamifero Pequeño', 'Pez', ];
 
 TextEditingController _inputFieldDateController = new TextEditingController();
 
@@ -28,7 +27,7 @@ TextEditingController _inputFieldDateController = new TextEditingController();
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
-      title: Text('Ingrese Informacion Mascota'),
+      title: Text('Información Mascota'),
     ),
     body: ListView(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
@@ -39,7 +38,13 @@ Widget build(BuildContext context) {
         Divider(),
         _creartelefono(),
         Divider(),
-        _crearDropdown(),
+        _crearraza(),
+         Divider(),
+        _crearsexo(),
+        Divider(),
+        _crearedad(),
+        Divider(),
+        _creartipo(),
         Divider(),
         _crearFecha( context ),
         Divider(),
@@ -101,6 +106,22 @@ Widget _crearnombrepropietario() {
             }));
   }
 
+   Widget _crearedad() {
+    return TextField(
+        obscureText: true,
+        decoration: InputDecoration(
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+            hintText: 'Edad Mascota',
+            labelText: 'Edad Mascota',
+            suffixIcon: Icon(Icons.pets),
+            icon: Icon(Icons.pets)),
+        onChanged: (valor) => setState(() {
+              _edad = valor;
+            }));
+  }
+
+
   Widget _crearFecha(BuildContext context) {
     return TextField(
       enableInteractiveSelection: false,
@@ -144,22 +165,82 @@ Widget _crearnombrepropietario() {
           value: sexo,
           ));
      });
+      return lista;
+       }
+  List<DropdownMenuItem<String>> getOpcionesDropdown1() {
 
-     return lista;
+  List<DropdownMenuItem<String>> lista1 = new List();
+      _razas.forEach((raza) {
+      lista1.add(DropdownMenuItem(
+        child: Text(raza),
+        value: raza,
+      ));
+    });
+    return lista1;
+     }
+List<DropdownMenuItem<String>> getOpcionesDropdown2() {
+List<DropdownMenuItem<String>> lista2 = new List();
+    _tipos.forEach((tipo) {
+      lista2.add(DropdownMenuItem(
+        child: Text(tipo),
+        value: tipo,
+      ));
+    });
+     return lista2;
  }
 
-  Widget _crearDropdown() {
+  Widget _crearsexo() {
     return Row(
       children: <Widget>[
         Icon(Icons.select_all),
         SizedBox(width: 30.0),
         Expanded(
           child: DropdownButton(
-            value: _opcionSeleccionada,
+            value: _opcionsexo,
             items: getOpcionesDropdown(),
             onChanged: (opt) {
               setState(() {
-                _opcionSeleccionada = opt;
+                _opcionsexo = opt;
+              });
+            },
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _crearraza() {
+    return Row(
+      children: <Widget>[
+        Icon(Icons.select_all),
+        SizedBox(width: 30.0),
+        Expanded(
+          child: DropdownButton(
+            value: _opcionraza,
+            items: getOpcionesDropdown1(),
+            onChanged: (opt) {
+              setState(() {
+                _opcionraza = opt;
+              });
+            },
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _creartipo() {
+    return Row(
+      children: <Widget>[
+        Icon(Icons.select_all),
+        SizedBox(width: 30.0),
+        Expanded(
+          child: DropdownButton(
+            value: _opciontipo,
+            items: getOpcionesDropdown2(),
+            onChanged: (opt) {
+              setState(() {
+                _opciontipo = opt;
               });
             },
           ),
