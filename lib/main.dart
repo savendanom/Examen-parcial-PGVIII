@@ -5,9 +5,9 @@ import 'package:clase_3/src/routes/routes.dart';
 import 'package:clase_3/src/pages/alert_page.dart';
 
 
- 
+
 void main() => runApp(MyApp());
- 
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -32,10 +32,8 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(
           builder: ( BuildContext context ) => AlertPage()
         );
-
-
       },
-      
+
     );
   }
 }

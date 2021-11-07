@@ -32,7 +32,7 @@ Widget build(BuildContext context) {
     body: ListView(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
       children: <Widget>[
-        _crearInput(),
+        _crearnombrem(),
         Divider(),
         _crearnombrepropietario(),
         Divider(),
@@ -48,15 +48,16 @@ Widget build(BuildContext context) {
         Divider(),
         _crearFecha( context ),
         Divider(),
+        _crearbuild(context),
         ],
     ),
   );
 }
 
-Widget _crearInput() {
+Widget _crearnombrem() {
 return TextField(
     // autofocus: true,
-    textCapitalization: TextCapitalization.sentences,
+    keyboardType: TextInputType.text,
     decoration: InputDecoration(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20.0)),
@@ -64,8 +65,8 @@ return TextField(
       hintText: 'Nombre Mascota',
       labelText: 'Nombre Mascota',
       helperText: 'Sólo es el nombre',
-      suffixIcon: Icon( Icons.accessibility ),
-      icon: Icon( Icons.account_circle )
+      suffixIcon: Icon( Icons.pets ),
+      icon: Icon( Icons.pets )
     ),
     onChanged: (valor){
       setState(() {
@@ -73,11 +74,11 @@ return TextField(
       });
     },
   );
-
 }
+
 Widget _crearnombrepropietario() {
     return TextField(
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.text,
         decoration: InputDecoration(
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -89,11 +90,11 @@ Widget _crearnombrepropietario() {
         onChanged: (valor) => setState(() {
               _nombrepropietario = valor;
             }));
-  }
+}
 
-  Widget _creartelefono() {
+Widget _creartelefono() {
     return TextField(
-        obscureText: true,
+        keyboardType: TextInputType.phone,
         decoration: InputDecoration(
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -104,11 +105,11 @@ Widget _crearnombrepropietario() {
         onChanged: (valor) => setState(() {
               _telefonod = valor;
             }));
-  }
+}
 
-   Widget _crearedad() {
+Widget _crearedad() {
     return TextField(
-        obscureText: true,
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -119,10 +120,9 @@ Widget _crearnombrepropietario() {
         onChanged: (valor) => setState(() {
               _edad = valor;
             }));
-  }
+}
 
-
-  Widget _crearFecha(BuildContext context) {
+Widget _crearFecha(BuildContext context) {
     return TextField(
       enableInteractiveSelection: false,
       controller: _inputFieldDateController,
@@ -138,7 +138,6 @@ Widget _crearnombrepropietario() {
       },
     );
   }
-
   _selectDate(BuildContext context) async {
     DateTime picked = await showDatePicker(
         context: context,
@@ -153,12 +152,10 @@ Widget _crearnombrepropietario() {
         _inputFieldDateController.text = _fecha;
       });
     }
-  }
+}
 
-  List<DropdownMenuItem<String>> getOpcionesDropdown() {
-
-  List<DropdownMenuItem<String>> lista = new List();
-
+List<DropdownMenuItem<String>> getOpcionesDropdown() {
+List<DropdownMenuItem<String>> lista = new List();
     _sexos.forEach((sexo) {
           lista.add(DropdownMenuItem(
           child: Text(sexo),
@@ -166,9 +163,9 @@ Widget _crearnombrepropietario() {
           ));
      });
       return lista;
-       }
-  List<DropdownMenuItem<String>> getOpcionesDropdown1() {
+}
 
+  List<DropdownMenuItem<String>> getOpcionesDropdown1() {
   List<DropdownMenuItem<String>> lista1 = new List();
       _razas.forEach((raza) {
       lista1.add(DropdownMenuItem(
@@ -177,7 +174,7 @@ Widget _crearnombrepropietario() {
       ));
     });
     return lista1;
-     }
+    }
 List<DropdownMenuItem<String>> getOpcionesDropdown2() {
 List<DropdownMenuItem<String>> lista2 = new List();
     _tipos.forEach((tipo) {
@@ -188,8 +185,7 @@ List<DropdownMenuItem<String>> lista2 = new List();
     });
      return lista2;
  }
-
-  Widget _crearsexo() {
+Widget _crearsexo() {
     return Row(
       children: <Widget>[
         Icon(Icons.select_all),
@@ -207,9 +203,9 @@ List<DropdownMenuItem<String>> lista2 = new List();
         )
       ],
     );
-  }
+}
 
-  Widget _crearraza() {
+Widget _crearraza() {
     return Row(
       children: <Widget>[
         Icon(Icons.select_all),
@@ -227,9 +223,9 @@ List<DropdownMenuItem<String>> lista2 = new List();
         )
       ],
     );
-  }
+}
 
-  Widget _creartipo() {
+Widget _creartipo() {
     return Row(
       children: <Widget>[
         Icon(Icons.select_all),
@@ -247,13 +243,68 @@ List<DropdownMenuItem<String>> lista2 = new List();
         )
       ],
     );
-  }
+}
 
-  // Widget _crearPersona() {
-  //   return ListTile(
-  //     title: Text('Nombre es: $_nombre'),
-  //     subtitle: Text('Email: $_email'),
-  //     trailing: Text(_opcionSeleccionada),
-  //   );
-  // }
+Widget _crearbuild(BuildContext context) {
+    return Row(
+    children: <Widget>[
+      Icon(Icons.select_all),
+      SizedBox(width: 30.0),
+      Expanded(
+      child: RaisedButton(
+        child: Text('Ver informacion'),
+        color: Colors.blue,
+        textColor: Colors.white,
+        shape: StadiumBorder(),
+        onPressed: () => _mostrarAlert(context),
+      ),
+    // floatingActionButton: FloatingActionButton(
+    //   child: Icon(Icons.add_location),
+    //   onPressed: () {
+    //     Navigator.pop(context);
+    //   },
+    ),
+    ],
+  );
+}
+
+void _mostrarAlert(BuildContext context) {
+  showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          title: Text('Datos Mascota'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('Nombre Propietario:'),Text('$_nombrepropietario'),
+              Text('Telefono:'),Text('$_telefonod'),
+              Text('Datos Mascota:'),Text('$_nombre'),
+              Text('$_opcionraza'),
+              Text('$_opcionsexo'),
+              Text('$_edad Años'),
+              Text('$_opciontipo'),
+              Text('$_fecha'),
+             // FlutterLogo(size: 100.0)
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Editar'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            FlatButton(
+              child: Text('Guardar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+
+              },
+            ),
+          ],
+        );
+      });
+}
 }
