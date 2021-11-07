@@ -8,7 +8,7 @@ import 'package:clase_3/src/pages/alert_page.dart';
 
 
 class HomePage extends StatelessWidget {
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,25 +34,20 @@ class HomePage extends StatelessWidget {
       },
     );
 
-  
 
-    
+
+
 
   }
 
   List<Widget> _listaItems( List<dynamic> data, BuildContext context ) {
-
     final List<Widget> opciones = [];
-
-
     data.forEach( (opt) {
-
       final widgetTemp = ListTile(
         title: Text( opt['texto'] ),
         leading:  getIcon( opt['icon'] ) ,
         trailing: Icon ( Icons.keyboard_arrow_right, color: Colors.blue ),
         onTap: () {
-
           Navigator.pushNamed(context, opt['ruta'] );
 
           // final route = MaterialPageRoute(

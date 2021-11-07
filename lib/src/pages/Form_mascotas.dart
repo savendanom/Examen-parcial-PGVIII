@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:clase_3/src/utils/icono_string_util.dart';
 
 
 class FormMascotas extends StatefulWidget {
@@ -13,6 +14,7 @@ String _nombrepropietario  = '';
 String _telefonod  = '';
 String _edad = '';
 String _fecha = '';
+List _registro = [];
 
 String _opcionraza = 'Labrador';
 String _opcionsexo = 'Macho';
@@ -23,34 +25,49 @@ List<String> _tipos = ['Ave', 'Perro', 'Gato', 'Mamifero Pequeño', 'Pez', ];
 
 TextEditingController _inputFieldDateController = new TextEditingController();
 
+  get floatingActionButton => null;
+
 @override
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
       title: Text('Información Mascota'),
     ),
-    body: ListView(
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-      children: <Widget>[
-        _crearnombrem(),
-        Divider(),
-        _crearnombrepropietario(),
-        Divider(),
-        _creartelefono(),
-        Divider(),
-        _crearraza(),
-         Divider(),
-        _crearsexo(),
-        Divider(),
-        _crearedad(),
-        Divider(),
-        _creartipo(),
-        Divider(),
-        _crearFecha( context ),
-        Divider(),
-        _crearbuild(context),
-        ],
+    body:GridView.count(
+      crossAxisCount: 1,
+      children: [
+        ListView(
+          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+          children: <Widget>[
+            _crearnombrem(),
+            Divider(),
+            _crearnombrepropietario(),
+            Divider(),
+            _creartelefono(),
+            Divider(),
+            _crearraza(),
+            Divider(),
+            _crearsexo(),
+            Divider(),
+            _crearedad(),
+            Divider(),
+            _creartipo(),
+            Divider(),
+            _crearFecha( context ),
+            Divider(),
+            _crearbuild(context),
+          ],
+        ),
+        _lista(),
+      ]
     ),
+  floatingActionButton: FloatingActionButton(
+  child: Icon(Icons.save),
+  onPressed: () {
+   _guardar();
+
+    //Navigator.pop(context);
+  }),
   );
 }
 
@@ -299,12 +316,60 @@ void _mostrarAlert(BuildContext context) {
             FlatButton(
               child: Text('Guardar'),
               onPressed: () {
-                Navigator.of(context).pop();
+              Navigator.of(context).pop();
+              Map<String, dynamic> pet = {
+                        'nombreMascota': _nombre,
+                        'nombrePropietario': _nombrepropietario,
+                        'telefono': _telefonod,
+                        'raza': _opcionraza,
+                        'sexo': _opcionsexo,
+                        'edadMascota': _edad,
+                        'tipoMascota': _opciontipo,
+                        'nacimiento': _fecha
+                      };
+                      setState(() {
+                        _registro.add(pet);
+                      });
 
-              },
+             }
             ),
           ],
         );
       });
 }
+  Widget _lista() {
+    return ListView(
+       children: _listaItems(_registro, context),
+    );
+  }
+
+  List<Widget> _listaItems(List<dynamic> data, BuildContext context) {
+    final List<Widget> opciones = [];
+    data.forEach((opt) {
+      final widgetTemp = ListTile(
+        title: Text('$_nombre $_nombrepropietario $_telefonod $_opcionraza $_opcionsexo $_edad $_opciontipo'),
+        leading: getIcon(opt['icon']),
+        trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue),
+      );
+      opciones
+        ..add(widgetTemp)
+        ..add(Divider());
+    });
+    return opciones;
+  }
+ void _guardar() {
+          Map<String, dynamic> pet = {
+            'nombreMascota': _nombre,
+            'nombrePropietario': _nombrepropietario,
+            'telefono': _telefonod,
+            'raza': _opcionraza,
+            'sexo': _opcionsexo,
+            'edadMascota': _edad,
+            'tipoMascota': _opciontipo,
+            'nacimiento': _fecha
+          };
+          setState(() {
+            _registro.add(pet);
+          });
+  }
 }

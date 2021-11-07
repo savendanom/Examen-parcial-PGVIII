@@ -53,24 +53,19 @@ class _ListaPageState extends State<ListaPage> {
             _crearLoading()
         ],
       )
-      
-      
+
+
     );
   }
 
   Widget _crearLista() {
-
     return RefreshIndicator(
-
         onRefresh: obtenerPagina1,
-
         child: ListView.builder(
         controller: _scrollController,
         itemCount: _listaNumeros.length,
         itemBuilder: (BuildContext context, int index ){
-
-          final imagen = _listaNumeros[index];
-
+        final imagen = _listaNumeros[index];
           return FadeInImage(
             image: NetworkImage('https://picsum.photos/500/300/?image=$imagen'),
             placeholder: AssetImage('assets/jar-loading.gif'),
@@ -78,7 +73,6 @@ class _ListaPageState extends State<ListaPage> {
         },
       ),
     );
-
   }
 
   Future<Null> obtenerPagina1() async {
@@ -153,9 +147,9 @@ class _ListaPageState extends State<ListaPage> {
           SizedBox( height: 15.0)
         ],
       );
-      
-      
-      
+
+
+
     } else {
       return Container();
     }
